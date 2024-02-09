@@ -18,8 +18,9 @@ sudo apt-get update \
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
 
+./chad.sh
+
 # To-do: 
 #   - install and config snort
-#   - install nvim and plugins 
 
 

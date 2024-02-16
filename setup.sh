@@ -32,21 +32,21 @@ cp -R /home/camp/ubuntu-prep/nginx/ /home/camp/
 git clone https://github.com/paulo-desouza/newspace360_django
 cd newspace360_django
 python3 ../s_gen.py
-echo "\nALLOWED_HOSTS=allowed hosts" >> .env
+echo -e "\nALLOWED_HOSTS=allowed hosts" >> .env
 cd ..
 
 
 git clone https://github.com/paulo-desouza/realestate-django
 cd realestate-django
 python3 ../s_gen.py
-echo "\nALLOWED_HOSTS=allowed hosts" >> .env
+echo -e "\nALLOWED_HOSTS=allowed hosts" >> .env
 cd ..
 
 
 git clone https://github.com/paulo-desouza/reception-app-django
 cd reception-app-django
 python3 ../s_gen.py
-echo "\nALLOWED_HOSTS=allowed hosts" >> .env
+echo -e "\nALLOWED_HOSTS=allowed hosts" >> .env
 cd ..
 
 

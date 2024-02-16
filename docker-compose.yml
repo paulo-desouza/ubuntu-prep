@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  
+   
   newspace_gunicorn:
     volumes:
       - ns-static:/static
@@ -73,13 +73,13 @@ services:
   ghost:
     image: ghost:5-alpine
     restart: always
-    ports:
-      - 8080:2368
+    expose: 
+     - 2368
     environment:
       database__client: mysql
       database__connection__host: db
       database__connection__user: root
-      database__connection__password: example
+      database__connection__password: example  # only for testing purposes, will deal with the secret before deployment 
       database__connection__database: ghost
       url: https://covil.art
 

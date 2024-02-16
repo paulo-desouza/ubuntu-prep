@@ -1,7 +1,6 @@
 version: '3.7'
 
 services:
-   
   newspace_gunicorn:
     volumes:
       - ns-static:/static
@@ -42,7 +41,6 @@ services:
   next:
     build:
       context: ./next_portfolio
-      dockerfile: Dockerfile
     container: nextjs-portfolio
     expose:
      - 3000
@@ -51,7 +49,6 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-
 
   ghost:
     image: ghost:5-alpine

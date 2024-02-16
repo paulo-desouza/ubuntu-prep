@@ -5,9 +5,9 @@ services:
     volumes:
       - ns-static:/static
     env_file:
-      - ./newspace360/.env
+      - ./newspace360_django/.env
     build:
-      context: ./newspace360
+      context: ./newspace360_django
 
     expose: 
      - 8000

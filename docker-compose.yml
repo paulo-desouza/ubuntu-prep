@@ -53,23 +53,6 @@ services:
       - /app/node_modules
 
 
-
-
-
-  nginx:
-    build: ./nginx
-    volumes:
-      - ns-static:/ns-static
-      - re-static:/re-static
-      - r-static:/r-static
-    ports:
-      - "80:80"
-    depends_on:
-      - newspace_gunicorn
-      - reception_gunicorn
-      - realestate_gunicorn
-      - next
-
   ghost:
     image: ghost:5-alpine
     restart: always
@@ -93,6 +76,21 @@ services:
       MYSQL_ROOT_PASSWORD: example
     volumes:
       - db:/var/lib/mysql
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - ns-static:/ns-static
+      - re-static:/re-static
+      - r-static:/r-static
+    ports:
+      - "80:80"
+    depends_on:
+      - newspace_gunicorn
+      - reception_gunicorn
+      - realestate_gunicorn
+      - next
+      - ghost
 
 
 

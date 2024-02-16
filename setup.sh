@@ -7,7 +7,6 @@ apt-get update -y
 
 apt-get install neofetch net-tools -y
 
-
 #  Adding docker repos to Ubuntu and installing Docker Engine
 # Add Docker's official GPG key:
 apt-get install ca-certificates curl
@@ -22,9 +21,7 @@ echo \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt-get update \
 
-
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y \
-
 
 cp /home/camp/ubuntu-prep/s_gen.py /home/camp/ubuntu-prep/docker-compose.yml /home/camp/
 
@@ -32,32 +29,28 @@ cp -R /home/camp/ubuntu-prep/nginx/ /home/camp/
 
 
 
-
-
 git clone https://github.com/paulo-desouza/newspace360_django
 cd newspace360_django
 python3 ../s_gen.py
-echo "ALLOWED_HOSTS=allowed hosts" >> .env
+echo "\nALLOWED_HOSTS=allowed hosts" >> .env
 cd ..
 
 
 git clone https://github.com/paulo-desouza/realestate-django
 cd realestate-django
 python3 ../s_gen.py
-echo "ALLOWED_HOSTS=allowed hosts" >> .env
+echo "\nALLOWED_HOSTS=allowed hosts" >> .env
 cd ..
 
 
 git clone https://github.com/paulo-desouza/reception-app-django
 cd reception-app-django
 python3 ../s_gen.py
-echo "ALLOWED_HOSTS=allowed hosts" >> .env
+echo "\nALLOWED_HOSTS=allowed hosts" >> .env
 cd ..
 
 
 git clone https://github.com/paulo-desouza/next_portfolio
-
-
 
 
 docker compose up

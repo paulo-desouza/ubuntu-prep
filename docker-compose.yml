@@ -5,7 +5,7 @@ services:
     volumes:
       - ns-static:/static
     env_file:
-      - .env
+      - ./newspace360/.env
     build:
       context: ./newspace360
 
@@ -18,7 +18,7 @@ services:
     volumes:
       - re-static:/static
     env_file:
-      - .env
+      - ./realestate-django/.env
     build:
       context: ./realestate-django
     expose: 
@@ -30,7 +30,7 @@ services:
     volumes:
       - r-static:/static
     env_file:
-      - .env
+      - ./reception-app-django/.env
     build:
       context: ./reception-app-django
     expose: 

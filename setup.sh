@@ -3,9 +3,9 @@
 cd ~
 
 # Updates and basic tools for server administration
-apt-get update
+apt-get update -y
 
-apt-get install neofetch net-tools 
+apt-get install neofetch net-tools -y
 
 
 #  Adding docker repos to Ubuntu and installing Docker Engine
@@ -23,12 +23,12 @@ echo \
 apt-get update \
 
 
-apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y \
 
 
-cp ~/ubuntu-prep/s_gen.py ~/ubuntu-prep/docker-compose.yml ~
+cp /home/camp/ubuntu-prep/s_gen.py /home/camp/ubuntu-prep/docker-compose.yml /home/camp/
 
-cp -R ~/ubuntu-prep/nginx ~
+cp -R /home/camp/ubuntu-prep/nginx/ /home/camp/
 
 
 

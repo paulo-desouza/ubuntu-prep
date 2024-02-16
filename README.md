@@ -1,7 +1,8 @@
 # Automating my Ubuntu Server deployment. 
 
-Scripts to automate my server's setup. 
+Automation of my server's setup. 
+Last steps:
+ - Install and configure Certbot
 
-Plans are to run these on ansible playbooks, but for now, we're doing bash scripts. 
-
+ - Finish testing this build on local VM;
 Bash FTW!

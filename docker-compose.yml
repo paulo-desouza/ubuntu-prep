@@ -1,0 +1,106 @@
+version: '3.7'
+
+services:
+  
+  newspace_gunicorn:
+    volumes:
+      - ns-static:/static
+    env_file:
+      - .env
+    build:
+      context: ./newspace360
+
+    expose: 
+     - 8000
+#    ports: 
+#      - "8000:8000"
+
+  realestate_gunicorn:
+    volumes:
+      - re-static:/static
+    env_file:
+      - .env
+    build:
+      context: ./realestate-django
+    expose: 
+     - 8001
+#    ports: 
+#      - "8001:8001"
+
+  reception_gunicorn:
+    volumes:
+      - r-static:/static
+    env_file:
+      - .env
+    build:
+      context: ./reception-app-django
+    expose: 
+     - 8002
+#    ports: 
+#      - "8002:8002"
+
+  next:
+    build:
+      context: ./next_portfolio
+      dockerfile: Dockerfile
+    container: nextjs-portfolio
+    expose:
+     - 3000
+#    ports:
+#      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+
+
+
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - ns-static:/ns-static
+      - re-static:/re-static
+      - r-static:/r-static
+    ports:
+      - "80:80"
+    depends_on:
+      - newspace_gunicorn
+      - reception_gunicorn
+      - realestate_gunicorn
+      - next
+
+  ghost:
+    image: ghost:5-alpine
+    restart: always
+    ports:
+      - 8080:2368
+    environment:
+      database__client: mysql
+      database__connection__host: db
+      database__connection__user: root
+      database__connection__password: example
+      database__connection__database: ghost
+      url: https://covil.art
+
+    volumes:
+      - ghost:/var/lib/ghost/content
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - db:/var/lib/mysql
+
+
+
+
+volumes:
+  ns-static:
+  re-static:
+  r-static: 
+
+  ghost:
+  db:

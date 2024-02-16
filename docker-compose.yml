@@ -39,16 +39,15 @@ services:
 #      - "8002:8002"
 
   next:
+    volumes:
+      - .:/app
+      - /app/node_modules
     build:
       context: ./next_portfolio
-    container: nextjs-portfolio
     expose:
      - 3000
 #    ports:
 #      - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
 
   ghost:
     image: ghost:5-alpine

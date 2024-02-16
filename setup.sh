@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~
+cd /home/camp/
 
 # Updates and basic tools for server administration
 apt-get update -y

@@ -60,7 +60,7 @@ services:
       database__connection__user: root
       database__connection__password: example
       database__connection__database: ghost
-      url: 0.0.0.0
+      url: http://covil.art
 
     volumes:
       - ghost:/var/lib/ghost/content

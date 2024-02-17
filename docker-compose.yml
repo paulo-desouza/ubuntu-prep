@@ -58,9 +58,9 @@ services:
       database__client: mysql
       database__connection__host: db
       database__connection__user: root
-      database__connection__password: example  # only for testing purposes, will deal with the secret before deployment 
+      database__connection__password: example
       database__connection__database: ghost
-      url: https://covil.art
+      url: 0.0.0.0
 
     volumes:
       - ghost:/var/lib/ghost/content

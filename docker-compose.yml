@@ -5,9 +5,9 @@ services:
     volumes:
       - ns-static:/static
     env_file:
-      - /home/camp/newspace360_django/.env
+      - /home/ubuntu/newspace360_django/.env
     build:
-      context: /home/camp/newspace360_django
+      context: /home/ubuntu/newspace360_django
 
     expose: 
      - 8000
@@ -18,9 +18,9 @@ services:
     volumes:
       - re-static:/static
     env_file:
-      - /home/camp/realestate-django/.env
+      - /home/ubuntu/realestate-django/.env
     build:
-      context: /home/camp/realestate-django
+      context: /home/ubuntu/realestate-django
     expose: 
      - 8001
 #    ports: 
@@ -30,9 +30,9 @@ services:
     volumes:
       - r-static:/static
     env_file:
-      - /home/camp/reception-app-django/.env
+      - /home/ubuntu/reception-app-django/.env
     build:
-      context: /home/camp/reception-app-django
+      context: /home/ubuntu/reception-app-django
     expose: 
      - 8002
 #    ports: 
@@ -43,7 +43,7 @@ services:
       - .:/app
       - /app/node_modules
     build:
-      context: /home/camp/next_portfolio
+      context: /home/ubuntu/next_portfolio
     expose:
      - 3000
 #    ports:

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/camp/
+cd /home/ubuntu/
 
 # Updates and basic tools for server administration
 apt-get update -y
@@ -23,30 +23,30 @@ apt-get update \
 
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y \
 
-cp /home/camp/ubuntu-prep/s_gen.py /home/camp/ubuntu-prep/docker-compose.yml /home/camp/
+cp /home/ubuntu/ubuntu-prep/s_gen.py /home/ubuntu/ubuntu-prep/docker-compose.yml /home/ubuntu/
 
-cp -R /home/camp/ubuntu-prep/nginx/ /home/camp/
+cp -R /home/ubuntu/ubuntu-prep/nginx/ /home/ubuntu/
 
 
 
 git clone https://github.com/paulo-desouza/newspace360_django
 cd newspace360_django
 python3 ../s_gen.py
-echo -e "\nALLOWED_HOSTS=allowed hosts" >> .env
+echo -e "\nALLOWED_HOSTS='newspace360.net www.newspace360.net'" >> .env
 cd ..
 
 
 git clone https://github.com/paulo-desouza/realestate-django
 cd realestate-django
 python3 ../s_gen.py
-echo -e "\nALLOWED_HOSTS=allowed hosts" >> .env
+echo -e "\nALLOWED_HOSTS='re.desouza-tech.com www.re.desouza-tech.com'" >> .env
 cd ..
 
 
 git clone https://github.com/paulo-desouza/reception-app-django
 cd reception-app-django
 python3 ../s_gen.py
-echo -e "\nALLOWED_HOSTS=allowed hosts" >> .env
+echo -e "\nALLOWED_HOSTS='reception.desouza-tech.com www.reception.desouza-tech.com'" >> .env
 cd ..
 
 

@@ -29,7 +29,7 @@ services:
 
   next:
     volumes:
-      - .:/app
+      - portfolio:/app
       - /app/node_modules
     build:
       context: /home/ubuntu/next_portfolio
@@ -67,6 +67,8 @@ services:
     volumes:
       - ns-static:/ns-static
       - r-static:/r-static
+      - portfolio:/portfolio
+
     ports:
       - "80:80"
     depends_on:
@@ -81,6 +83,7 @@ services:
 volumes:
   ns-static:
   r-static: 
-
+  portfolio:
+  
   ghost:
   db:

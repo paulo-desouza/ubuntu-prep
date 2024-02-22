@@ -14,17 +14,6 @@ services:
 #    ports: 
 #      - "8000:8000"
 
-  realestate_gunicorn:
-    volumes:
-      - re-static:/static
-    env_file:
-      - /home/ubuntu/realestate-django/.env
-    build:
-      context: /home/ubuntu/realestate-django
-    expose: 
-     - 8001
-#    ports: 
-#      - "8001:8001"
 
   reception_gunicorn:
     volumes:
@@ -44,10 +33,10 @@ services:
       - /app/node_modules
     build:
       context: /home/ubuntu/next_portfolio
-    expose:
-     - 3000
-#    ports:
-#      - "3000:3000"
+#    expose:
+#     - 3000
+    ports:
+      - "3000:3000"
 
   ghost:
     image: ghost:5-alpine
@@ -77,14 +66,12 @@ services:
     build: ./nginx
     volumes:
       - ns-static:/ns-static
-      - re-static:/re-static
       - r-static:/r-static
     ports:
       - "80:80"
     depends_on:
       - newspace_gunicorn
       - reception_gunicorn
-      - realestate_gunicorn
       - next
       - ghost
 
@@ -93,7 +80,6 @@ services:
 
 volumes:
   ns-static:
-  re-static:
   r-static: 
 
   ghost:

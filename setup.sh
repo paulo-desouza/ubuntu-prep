@@ -36,13 +36,6 @@ echo -e "\nALLOWED_HOSTS='newspace360.net www.newspace360.net'" >> .env
 cd ..
 
 
-git clone https://github.com/paulo-desouza/realestate-django
-cd realestate-django
-python3 ../s_gen.py
-echo -e "\nALLOWED_HOSTS='re.desouza-tech.com www.re.desouza-tech.com'" >> .env
-cd ..
-
-
 git clone https://github.com/paulo-desouza/reception-app-django
 cd reception-app-django
 python3 ../s_gen.py

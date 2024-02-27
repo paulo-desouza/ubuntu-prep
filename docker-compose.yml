@@ -62,6 +62,18 @@ services:
   #   volumes:
   #     - db:/var/lib/mysql
 
+
+
+  certbot:
+      image: certbot/certbot:latest
+      command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email paulo@desouza-tech.com --agree-tos --no-eff-email -d desouza-tech.com -d www.desouza-tech.com
+      volumes:
+        - ./certbot/conf/:/etc/letsencrypt
+        - ./certbot/logs/:/var/log/letsencrypt
+        - ./certbot/data:/usr/share/nginx/html/letsencrypt
+
+
+
   nginx:
     build: ./nginx
     volumes:
@@ -81,17 +93,8 @@ services:
       # - newspace_gunicorn
       # - reception_gunicorn
       - next
+      - certbot
       # - ghost
-
-
-  certbot:
-      image: certbot/certbot:latest
-      command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email paulo@desouza-tech.com --agree-tos --no-eff-email -d desouza-tech.com -d www.desouza-tech.com
-      volumes:
-        - ./certbot/conf/:/etc/letsencrypt
-        - ./certbot/logs/:/var/log/letsencrypt
-        - ./certbot/data:/usr/share/nginx/html/letsencrypt
-
 
 volumes:
   # ns-static:

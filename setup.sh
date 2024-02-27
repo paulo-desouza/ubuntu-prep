@@ -5,7 +5,7 @@ cd /home/ubuntu/
 # Updates and basic tools for server administration
 apt-get update -y
 
-apt-get install neofetch net-tools ufw -y
+apt-get install neofetch net-tools -y
 
 #  Adding docker repos to Ubuntu and installing Docker Engine
 # Add Docker's official GPG key:
@@ -26,12 +26,6 @@ apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docke
 cp /home/ubuntu/ubuntu-prep/s_gen.py /home/ubuntu/ubuntu-prep/docker-compose.yml /home/ubuntu/
 
 cp -R /home/ubuntu/ubuntu-prep/nginx/ /home/ubuntu/
-
-ufw allow ssh
-ufw allow http
-ufw allow https
-
-ufw enable
 
 # git clone https://github.com/paulo-desouza/newspace360_django
 # cd newspace360_django
@@ -61,5 +55,8 @@ docker compose up
 
 # To-do: 
 #   - install and config snort
+#   - Configure the monitoring stack
+#   - Configure visualization of logs in Grafana
+
 
 

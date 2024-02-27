@@ -1,6 +1,46 @@
 version: '3.7'
 
 services:
+  certbot:
+    image: certbot/certbot:latest
+    command: certonly --dry-run --webroot --webroot-path=/var/www/certbot/ --email paulo@desouza-tech.com --agree-tos --no-eff-email -d desouza-tech.com -d www.desouza-tech.com
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+
+  next:
+    volumes:
+      - portfolio:/app
+      - /app/node_modules
+    build:
+      context: /home/ubuntu/next_portfolio
+#    expose:
+#     - 3000
+    ports:
+      - "3000:3000"
+
+  nginx:
+    build: ./nginx
+    volumes:
+      # - ns-static:/ns-static
+      # - r-static:/r-static
+      - portfolio:/portfolio
+      - ./nginx/conf/:/etc/nginx/conf.d/:rw
+      - ./certbot/www/:/var/www/certbot/:rw
+      
+    ports:
+      - 80:80
+      - 443:443
+
+    restart: always
+    depends_on:
+      # - newspace_gunicorn
+      # - reception_gunicorn
+      - next
+      # - ghost
+
+
+
 #   newspace_gunicorn:
 #     volumes:
 #       - ns-static:/static
@@ -27,25 +67,6 @@ services:
 # #    ports: 
 # #      - "8002:8002"
 
-  certbot:
-      image: certbot/certbot:latest
-      command: certonly --webroot --webroot-path=/var/www/certbot/ --email paulo@desouza-tech.com --agree-tos --no-eff-email -d desouza-tech.com -d www.desouza-tech.com
-      volumes:
-        - ./certbot/www/:/var/www/certbot/:rw
-        - ./certbot/conf/:/etc/letsencrypt/:rw
-
-
-  next:
-    volumes:
-      - portfolio:/app
-      - /app/node_modules
-    build:
-      context: /home/ubuntu/next_portfolio
-#    expose:
-#     - 3000
-    ports:
-      - "3000:3000"
-
   # ghost:
   #   image: ghost:5-alpine
   #   restart: always
@@ -70,30 +91,6 @@ services:
   #   volumes:
   #     - db:/var/lib/mysql
 
-
-
-
-
-  nginx:
-    build: ./nginx
-    volumes:
-      # - ns-static:/ns-static
-      # - r-static:/r-static
-      - portfolio:/portfolio
-      - ./nginx/conf/:/etc/nginx/conf.d/:ro
-      - ./certbot/www/:/var/www/certbot/:ro
-      
-
-    ports:
-      - 80:80
-      - 443:443
-
-    restart: always
-    depends_on:
-      # - newspace_gunicorn
-      # - reception_gunicorn
-      - next
-      # - ghost
 
 volumes:
   # ns-static:

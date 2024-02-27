@@ -27,6 +27,14 @@ services:
 # #    ports: 
 # #      - "8002:8002"
 
+  certbot:
+      image: certbot/certbot:latest
+      command: certonly --webroot --webroot-path=/var/www/certbot/ --email paulo@desouza-tech.com --agree-tos --no-eff-email -d desouza-tech.com -d www.desouza-tech.com
+      volumes:
+        - ./certbot/www/:/var/www/certbot/:rw
+        - ./certbot/conf/:/etc/letsencrypt/:rw
+
+
   next:
     volumes:
       - portfolio:/app
@@ -64,14 +72,6 @@ services:
 
 
 
-  certbot:
-      image: certbot/certbot:latest
-      command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email paulo@desouza-tech.com --agree-tos --no-eff-email -d desouza-tech.com -d www.desouza-tech.com
-      volumes:
-        - ./certbot/conf/:/etc/letsencrypt
-        - ./certbot/logs/:/var/log/letsencrypt
-        - ./certbot/data:/usr/share/nginx/html/letsencrypt
-
 
 
   nginx:
@@ -80,8 +80,8 @@ services:
       # - ns-static:/ns-static
       # - r-static:/r-static
       - portfolio:/portfolio
-      - ./certbot/conf/:/etc/nginx/ssl/
-      - ./certbot/data:/usr/share/nginx/html/letsencrypt
+      - ./nginx/conf/:/etc/nginx/conf.d/:ro
+      - ./certbot/www/:/var/www/certbot/:ro
       
 
     ports:
@@ -93,7 +93,6 @@ services:
       # - newspace_gunicorn
       # - reception_gunicorn
       - next
-      - certbot
       # - ghost
 
 volumes:

@@ -5,7 +5,7 @@ cd /home/ubuntu/
 # Updates and basic tools for server administration
 apt-get update -y
 
-apt-get install neofetch net-tools -y
+apt-get install neofetch net-tools ufw -y
 
 #  Adding docker repos to Ubuntu and installing Docker Engine
 # Add Docker's official GPG key:
@@ -27,20 +27,24 @@ cp /home/ubuntu/ubuntu-prep/s_gen.py /home/ubuntu/ubuntu-prep/docker-compose.yml
 
 cp -R /home/ubuntu/ubuntu-prep/nginx/ /home/ubuntu/
 
+ufw allow ssh
+ufw allow http
+ufw allow https
+
+ufw enable
+
+# git clone https://github.com/paulo-desouza/newspace360_django
+# cd newspace360_django
+# python3 ../s_gen.py
+# echo -e "\nALLOWED_HOSTS='newspace360.net www.newspace360.net'" >> .env
+# cd ..
 
 
-git clone https://github.com/paulo-desouza/newspace360_django
-cd newspace360_django
-python3 ../s_gen.py
-echo -e "\nALLOWED_HOSTS='newspace360.net www.newspace360.net'" >> .env
-cd ..
-
-
-git clone https://github.com/paulo-desouza/reception-app-django
-cd reception-app-django
-python3 ../s_gen.py
-echo -e "\nALLOWED_HOSTS='reception.desouza-tech.com www.reception.desouza-tech.com'" >> .env
-cd ..
+# git clone https://github.com/paulo-desouza/reception-app-django
+# cd reception-app-django
+# python3 ../s_gen.py
+# echo -e "\nALLOWED_HOSTS='reception.desouza-tech.com www.reception.desouza-tech.com'" >> .env
+# cd ..
 
 
 git clone https://github.com/paulo-desouza/next_portfolio

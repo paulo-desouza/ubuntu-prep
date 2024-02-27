@@ -1,31 +1,31 @@
 version: '3.7'
 
 services:
-  newspace_gunicorn:
-    volumes:
-      - ns-static:/static
-    env_file:
-      - /home/ubuntu/newspace360_django/.env
-    build:
-      context: /home/ubuntu/newspace360_django
+#   newspace_gunicorn:
+#     volumes:
+#       - ns-static:/static
+#     env_file:
+#       - /home/ubuntu/newspace360_django/.env
+#     build:
+#       context: /home/ubuntu/newspace360_django
 
-    expose: 
-     - 8000
-#    ports: 
-#      - "8000:8000"
+#     expose: 
+#      - 8000
+# #    ports: 
+# #      - "8000:8000"
 
 
-  reception_gunicorn:
-    volumes:
-      - r-static:/static
-    env_file:
-      - /home/ubuntu/reception-app-django/.env
-    build:
-      context: /home/ubuntu/reception-app-django
-    expose: 
-     - 8002
-#    ports: 
-#      - "8002:8002"
+#   reception_gunicorn:
+#     volumes:
+#       - r-static:/static
+#     env_file:
+#       - /home/ubuntu/reception-app-django/.env
+#     build:
+#       context: /home/ubuntu/reception-app-django
+#     expose: 
+#      - 8002
+# #    ports: 
+# #      - "8002:8002"
 
   next:
     volumes:
@@ -38,52 +38,64 @@ services:
     ports:
       - "3000:3000"
 
-  ghost:
-    image: ghost:5-alpine
-    restart: always
-    expose: 
-     - 2368
-    environment:
-      database__client: mysql
-      database__connection__host: db
-      database__connection__user: root
-      database__connection__password: example
-      database__connection__database: ghost
-      url: http://covil.art
+  # ghost:
+  #   image: ghost:5-alpine
+  #   restart: always
+  #   expose: 
+  #    - 2368
+  #   environment:
+  #     database__client: mysql
+  #     database__connection__host: db
+  #     database__connection__user: root
+  #     database__connection__password: example
+  #     database__connection__database: ghost
+  #     url: http://covil.art
 
-    volumes:
-      - ghost:/var/lib/ghost/content
+  #   volumes:
+  #     - ghost:/var/lib/ghost/content
 
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: example
-    volumes:
-      - db:/var/lib/mysql
+  # db:
+  #   image: mysql:8.0
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: example
+  #   volumes:
+  #     - db:/var/lib/mysql
 
   nginx:
     build: ./nginx
     volumes:
-      - ns-static:/ns-static
-      - r-static:/r-static
+      # - ns-static:/ns-static
+      # - r-static:/r-static
       - portfolio:/portfolio
+      - ./certbot/conf/:/etc/nginx/ssl/
+      - ./certbot/data:/usr/share/nginx/html/letsencrypt
+      
 
     ports:
-      - "80:80"
+      - 80:80
+      - 443:443
+
+    restart: always
     depends_on:
-      - newspace_gunicorn
-      - reception_gunicorn
+      # - newspace_gunicorn
+      # - reception_gunicorn
       - next
-      - ghost
+      # - ghost
 
 
+  certbot:
+      image: certbot/certbot:latest
+      command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email paulo@desouza-tech.com --agree-tos --no-eff-email -d desouza-tech.com -d www.desouza-tech.com
+      volumes:
+        - ./certbot/conf/:/etc/letsencrypt
+        - ./certbot/logs/:/var/log/letsencrypt
+        - ./certbot/data:/usr/share/nginx/html/letsencrypt
 
 
 volumes:
-  ns-static:
-  r-static: 
+  # ns-static:
+  # r-static: 
   portfolio:
-  
-  ghost:
-  db:
+  # ghost:
+  # db:

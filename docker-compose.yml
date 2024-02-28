@@ -1,12 +1,6 @@
 version: '3.7'
 
 services:
-  certbot:
-    image: certbot/certbot:latest
-    command: certonly --webroot --webroot-path=/var/www/certbot/ --email paulo@desouza-tech.com --agree-tos --no-eff-email -d desouza-tech.com -d www.desouza-tech.com
-    volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
 
   next:
     volumes:
@@ -21,26 +15,26 @@ services:
 
   nginx:
     container_name: nginx
+    restart: unless-stopped
     image: nginx
-    volumes:
-      # - ns-static:/ns-static
-      # - r-static:/r-static
-      - ./nginx/portfolio.conf:/etc/nginx/conf.d/portfolio.conf
-      - portfolio:/portfolio
-      - ./nginx/conf/:/etc/nginx/conf.d/:rw
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-      
     ports:
       - 80:80
       - 443:443
-
-    restart: unless-stopeed
-    depends_on:
-      # - newspace_gunicorn
-      # - reception_gunicorn
-      - next
-      # - ghost
+    volumes:
+      - portfolio:/portfolio
+      - ./nginx/portfolio.conf:/etc/nginx/conf.d/portfolio.conf
+      - ./certbot/conf/:/etc/letsencrypt
+      - ./certbot/www/:/var/www/certbot
+      # - ns-static:/ns-static
+      # - r-static:/r-static
+      
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot/conf/:/etc/letsencrypt
+      - ./certbot/www/:/var/www/certbot
+    command: certonly --webroot --webroot-path=/var/www/certbot --email paulo@desouza-tech.com --agree-tos --no-eff-email -d desouza-tech.com
 
 
 

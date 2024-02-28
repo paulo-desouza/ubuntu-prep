@@ -25,7 +25,7 @@ apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docke
 
 cp /home/ubuntu/ubuntu-prep/s_gen.py /home/ubuntu/ubuntu-prep/docker-compose.yml /home/ubuntu/
 
-cp -R /home/ubuntu/ubuntu-prep/nginx/ /home/ubuntu/
+cp /home/ubuntu/ubuntu-prep/nginx/ /home/ubuntu/
 
 # git clone https://github.com/paulo-desouza/newspace360_django
 # cd newspace360_django

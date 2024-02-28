@@ -95,6 +95,7 @@ services:
 volumes:
   # ns-static:
   # r-static: 
+  ./nginx/conf/:
   portfolio:
   # ghost:
   # db:

@@ -10,3 +10,4 @@ This completes the HTTPS encryption setup with Certbot.
 
 
 
+(If you are using AWS servers for your deployment, configuring your website SSL encryption is much much simpler and easier by using Amazon's ACM + Amazon's Load Balancer, it provides free (as in free-beer) SSL certificates signed by amazon. )
